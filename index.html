@@ -1,12 +1,51 @@
- <form id="regForm" novalidate>
- <label for="email">Email <span aria-hidden="true">*</span></label>
- <input type="email" id="email" name="email" required/>
- <small class="error" id="err-email"></small>
- <fieldset>
- <legend>Year of Study <span aria-hidden="true">*</span></legend>
- <label><input type="radio" name="year" value="1" required/> 1</label>
- <label><input type="radio" name="year" value="2"/> 2</label>
- </fieldset>
- <div aria-live="polite" class="sr" id="live"></div>
- <button type="submit">Add Student</button>
- </form>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Seattle Coffee — Registration & Profiles</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Easy Regs</h1>
+      <p class="lead">Welcome, we are super happy to get to know you.</p>
+    </header>
+
+    <section class="form-wrap" aria-labelledby="form-title">
+      <h2 id="form-title">Registration Form</h2>
+      <form id="regForm" novalidate>
+        <div class="row">
+          <div class="field">
+            <label for="first">First name <span aria-hidden="true">*</span></label>
+            <input id="first" name="first" required />
+            <small class="error" id="err-first" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="last">Last name <span aria-hidden="true">*</span></label>
+            <input id="last" name="last" required />
+            <small class="error" id="err-last" aria-live="polite"></small>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="email">Email <span aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" required />
+            <small class="error" id="err-email" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="programme">Programme</label>
+            <input id="programme" name="programme" placeholder="e.g. Software Engineering" />
+          </div>
+        </div>
+
+        <fieldset class="fieldset">
+          <legend>Year of Study <span aria-hidden="true">*</span></legend>
+          <label><input type="radio" name="year" value="1" required /> 1</label>
+          <label><input type="radio" name="year" value="2" /> 2</label>
+          <label><input type="radio" name="year" value="3" /> 3</label>
+          <label><input type="radio" name="year" value="4" /> 4</label>
+          <small class="error" id="err-year" aria-live="polite"></small>
+        </fieldset>
