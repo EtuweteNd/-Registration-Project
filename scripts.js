@@ -1,27 +1,47 @@
- function validateEmail(value){
- const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
- const err = document.getElementById("err-email");
- if(!ok){ err.textContent = "Please enter a valid email."; }
- else { err.textContent = ""; }
- return ok;
- }
- document.getElementById("regForm").addEventListener("submit", (e) => {
- const value = document.getElementById("email").value;
- if(!validateEmail(value)){
- e.preventDefault();
- document.getElementById("live").textContent = "Fix errors before submitting.";
- }
- });
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Student Registration</h1>
+    <form id="studentForm">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" required>
 
- function addEntry(data){
- // Card
- const card = document.createElement("div"); card.className = "card-person";
- card.innerHTML = ‘<img src="${data.photo||"https://placehold.co/128"}" alt="">
- <div><h3>${data.first} ${data.last}</h3>
- <p><span class="badge">${data.prog}</span> <span class="badge">Year ${data.year}</span></p></div>‘;
- document.getElementById("cards").prepend(card);
- // Table
- const tr = document.createElement("tr");
- tr.innerHTML = ‘<td>${data.first} ${data.last}</td><td>${data.prog}</td><td>${data.year}</td><td>${(data.interests||[]).join(", ")}</td>‘;
- document.querySelector("#summary tbody").prepend(tr);
- }
+      <label for="programme">Programme:</label>
+      <select id="programme" required>
+        <option value="">-- Select Programme --</option>
+        <option>Computer Science</option>
+        <option>Information Technology</option>
+        <option>Cyber Security</option>
+        <option>Software Engineering</option>
+        <option>Data Science</option>
+        <option>Artificial Intelligence</option>
+        <option>Networking & Communication</option>
+        <option>Multimedia & Graphic Design</option>
+        <option>Business Computing</option>
+        <option>Informatics</option>
+      </select>
+
+      <label for="interests">Interests:</label>
+      <input type="text" id="interests" placeholder="e.g. Coding, Research, AI">
+
+      <label for="photo">Upload Photo:</label>
+      <input type="file" id="photo" accept="image/*">
+      <button type="button" id="uploadBtn">Upload Photo</button>
+
+      <button type="submit">Register Student</button>
+    </form>
+
+    <h2>Registered Students</h2>
+    <div id="studentList" class="student-list"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
