@@ -1,0 +1,48 @@
+Student Registration Portal
+
+This project is a web-based Student Registration Portal built using HTML, CSS, and JavaScript.  
+It was created as part of a lab assignment and demonstrates core web development concepts such as form validation, DOM manipulation, and local storage.
+
+GitHub Repository: [Registration Project](https://github.com/EtuweteNd/-Registration-Project)
+
+---
+ Features
+
+- Register students with:
+  - First and last name
+  - Email
+  - Programme (as a dropdown selection)
+  - Year of study (radio buttons)
+  - Interests (entered as free text, which are comma separated)
+  - Profile photo (uploaded from the user’s device)
+
+- View profiles in card format with student photo and details.
+
+- See a summary table of all registered students with actions available.
+
+- Edit or remove a student, with changes reflected in both the card and the table.
+
+- Search for students by name or programme.
+
+- Data persistence using LocalStorage.
+
+
+This project includes 
+
+- HTML5 for structure  
+- CSS for design and responsive layout  
+- JavaScript for interactivity and data handling  
+
+ Purpose
+
+This project was developed as a lab exercise to practice:
+- Semantic HTML and accessible form design
+- Client-side validation
+- DOM updates and synchronization between components
+- LocalStorage for data persistence
+- Maintaining clean separation of HTML, CSS, and JavaScript
+
+
+
+Developed by Etuwete Ndaningina  
+GitHub: [EtuweteNd](https://github.com/EtuweteNd)
