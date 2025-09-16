@@ -9,39 +9,42 @@
 <body>
   <div class="container">
     <h1>Student Registration</h1>
-    <form id="studentForm">
-      <label for="name">Full Name:</label>
-      <input type="text" id="name" required>
+    <div class="main-layout">
+      <form id="studentForm" class="form-section">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" required>
 
-      <label for="programme">Programme:</label>
-      <select id="programme" required>
-        <option value="">-- Select Programme --</option>
-        <option>Computer Science</option>
-        <option>Information Technology</option>
-        <option>Cyber Security</option>
-        <option>Software Engineering</option>
-        <option>Data Science</option>
-        <option>Artificial Intelligence</option>
-        <option>Networking & Communication</option>
-        <option>Multimedia & Graphic Design</option>
-        <option>Business Computing</option>
-        <option>Informatics</option>
-      </select>
+        <label for="programme">Programme:</label>
+        <select id="programme" required>
+          <option value="">-- Select Programme --</option>
+          <option>Computer Science</option>
+          <option>Information Technology</option>
+          <option>Cyber Security</option>
+          <option>Software Engineering</option>
+          <option>Data Science</option>
+          <option>Artificial Intelligence</option>
+          <option>Networking & Communication</option>
+          <option>Multimedia & Graphic Design</option>
+          <option>Business Computing</option>
+          <option>Informatics</option>
+        </select>
 
-      <label for="interests">Interests:</label>
-      <input type="text" id="interests" placeholder="e.g. Coding, Research, AI">
+        <label for="interests">Interests:</label>
+        <input type="text" id="interests" placeholder="e.g. Coding, Research, AI">
 
-      <label for="photo">Upload Photo:</label>
-      <input type="file" id="photo" accept="image/*">
-      <button type="button" id="uploadBtn">Upload Photo</button>
+        <label for="photo">Upload Photo:</label>
+        <input type="file" id="photo" accept="image/*" hidden>
+        <button type="button" id="uploadBtn">Upload Photo</button>
 
-      <button type="submit">Register Student</button>
-    </form>
+        <button type="submit">Register Student</button>
+      </form>
 
-    <h2>Registered Students</h2>
-    <div id="studentList" class="student-list"></div>
+      <div class="students-section">
+        <h2>Registered Students</h2>
+        <div id="studentList" class="student-list"></div>
+      </div>
+    </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
