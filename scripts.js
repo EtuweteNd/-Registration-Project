@@ -1,47 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Registration System</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="container">
-    <h1>Student Registration</h1>
-    <form id="studentForm">
-      <label for="name">Full Name:</label>
-      <input type="text" id="name" required>
+document.getElementById('uploadBtn').addEventListener('click', () => {
+  document.getElementById('photo').click();
+});
 
-      <label for="programme">Programme:</label>
-      <select id="programme" required>
-        <option value="">-- Select Programme --</option>
-        <option>Computer Science</option>
-        <option>Information Technology</option>
-        <option>Cyber Security</option>
-        <option>Software Engineering</option>
-        <option>Data Science</option>
-        <option>Artificial Intelligence</option>
-        <option>Networking & Communication</option>
-        <option>Multimedia & Graphic Design</option>
-        <option>Business Computing</option>
-        <option>Informatics</option>
-      </select>
+document.getElementById('studentForm').addEventListener('submit', function(e) {
+  e.preventDefault();
 
-      <label for="interests">Interests:</label>
-      <input type="text" id="interests" placeholder="e.g. Coding, Research, AI">
+  const name = document.getElementById('name').value.trim();
+  const programme = document.getElementById('programme').value;
+  const interests = document.getElementById('interests').value.trim();
+  const photoInput = document.getElementById('photo');
 
-      <label for="photo">Upload Photo:</label>
-      <input type="file" id="photo" accept="image/*">
-      <button type="button" id="uploadBtn">Upload Photo</button>
+  if (!name || !programme) {
+    alert("Please fill in all required fields.");
+    return;
+  }
 
-      <button type="submit">Register Student</button>
-    </form>
+  let photoURL = "";
+  if (photoInput.files && photoInput.files[0]) {
+    photoURL = URL.createObjectURL(photoInput.files[0]);
+  }
 
-    <h2>Registered Students</h2>
-    <div id="studentList" class="student-list"></div>
-  </div>
+  const studentCard = document.createElement('div');
+  studentCard.className = 'student-card';
 
-  <script src="script.js"></script>
-</body>
-</html>
+  studentCard.innerHTML = `
+    <button class="remove-btn">X</button>
+    <img src="${photoURL || 'https://via.placeholder.com/100'}" alt="Student Photo">
+    <h3>${name}</h3>
+    <p><strong>Programme:</strong> ${programme}</p>
+    <p><strong>Interests:</strong> ${interests || 'N/A'}</p>
+  `;
+
+  // remove button functionalit
+  studentCard.querySelector('.remove-btn').addEventListener('click', () => {
+    studentCard.remove();
+  });
+
+  document.getElementById('studentList').appendChild(studentCard);
+
+  // Reset form
+  this.reset();
+});
