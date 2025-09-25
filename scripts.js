@@ -88,13 +88,14 @@ function renderStudentRow(st) {
   const row = document.createElement("tr");
   row.innerHTML = `
     <td>${st.firstName} ${st.lastName}</td>
-    <td>${st.email}</td><td>${st.gender}</td>
-    <td>${st.programme}</td><td>${st.year}</td>
-    <td>${st.interests.join(", ")}</td>
-    <td><button onclick="editStudent(${st.id})">Edit</button> 
-        <button onclick="deleteStudent(${st.id})">Delete</button></td>`;
+    <td>${st.email}</td>
+    <td>${st.gender}</td>
+    <td>${st.programme}</td>
+    <td>${st.year}</td>
+    <td>${st.interests.join(", ")}</td>`;
   return row;
 }
+
 
 function renderStudentCard(st) {
   const card = document.createElement("div");
@@ -144,3 +145,4 @@ function filterStudents() {
     tbody.appendChild(renderStudentRow(st));
   });
 }
+
