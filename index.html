@@ -1,50 +1,124 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Registration System</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Student Registration Portal</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Student Registration</h1>
-    <div class="main-layout">
-      <form id="studentForm" class="form-section">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" required>
-
-        <label for="programme">Programme:</label>
-        <select id="programme" required>
-          <option value="">-- Select Programme --</option>
-          <option>Computer Science</option>
-          <option>Information Technology</option>
-          <option>Cyber Security</option>
-          <option>Software Engineering</option>
-          <option>Data Science</option>
-          <option>Artificial Intelligence</option>
-          <option>Networking & Communication</option>
-          <option>Multimedia & Graphic Design</option>
-          <option>Business Computing</option>
-          <option>Informatics</option>
-        </select>
-
-        <label for="interests">Interests:</label>
-        <input type="text" id="interests" placeholder="e.g. Coding, Research, AI">
-
-        <label for="photo">Upload Photo:</label>
-        <input type="file" id="photo" accept="image/*" hidden>
-        <button type="button" id="uploadBtn">Upload Photo</button>
-
-        <button type="submit">Register Student</button>
-      </form>
-
-      <div class="students-section">
-        <h2>Registered Students</h2>
-        <div id="studentList" class="student-list"></div>
+  <div class="container" id="app">
+    <header>
+      <div class="logo">SR</div>
+      <div>
+        <h1>Student Registration Portal</h1>
+        <p class="lead">Register students, view profiles, edit or remove entries. Data persists in LocalStorage.</p>
       </div>
+    </header>
+
+    <div class="grid">
+      <!-- Form column -->
+      <section class="card">
+        <form id="studentForm" autocomplete="off">
+          <input type="hidden" id="studentId" />
+          <div class="form-row">
+            <div style="flex:1">
+              <label for="firstName">First name</label>
+              <input id="firstName" type="text" required />
+            </div>
+            <div style="flex:1">
+              <label for="lastName">Last name</label>
+              <input id="lastName" type="text" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div style="flex:1">
+              <label for="email">Email</label>
+              <input id="email" type="email" required />
+            </div>
+            <div style="flex:1">
+              <label for="gender">Gender</label>
+              <select id="gender" required>
+                <option value="">-- Select Gender --</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-bottom:10px">
+            <label for="programme">Programme</label>
+            <select id="programme" required>
+              <option value="">-- Select programme --</option>
+              <option>Software Engineering</option>
+              <option>Computer Science</option>
+              <option>Information Technology</option>
+              <option>Network Administration</option>
+            </select>
+          </div>
+
+          <div style="margin-bottom:10px">
+            <label>Year of study</label>
+            <div class="form-row" style="gap:10px">
+              <label><input type="radio" name="year" value="1" required /> Year 1</label>
+              <label><input type="radio" name="year" value="2" /> Year 2</label>
+              <label><input type="radio" name="year" value="3" /> Year 3</label>
+              <label><input type="radio" name="year" value="4" /> Year 4</label>
+            </div>
+          </div>
+
+          <div style="margin-bottom:10px">
+            <label for="interests">Interests (comma separated)</label>
+            <input id="interests" type="text" placeholder="e.g. Web dev, AI, Cybersecurity" />
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="photo-preview" id="photoPreview"> <span class="muted">96×96</span> </div>
+            <div style="flex:1">
+              <label for="photo">Profile photo</label>
+              <input id="photo" type="file" accept="image/*" />
+              <div class="small">Optional. If not supplied, a default avatar will be used.</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" id="saveBtn">Add Student</button>
+            <button type="button" id="resetBtn" class="ghost">Reset</button>
+            <div style="margin-left:auto;color:#475569;font-size:13px;padding:8px">Records: <span id="count">0</span></div>
+          </div>
+        </form>
+      </section>
+
+      <!-- Display column -->
+      <section>
+        <div class="controls">
+          <div class="search">
+            <input id="search" placeholder="Search by name or programme" />
+            <button id="clearSearch" class="ghost" type="button">Clear</button>
+          </div>
+          <div class="muted">Tip: click Edit on a table row or card to populate the form.</div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom:12px">Student Profiles</h3>
+          <div class="cards" id="cardsContainer"></div>
+        </div>
+
+        <div class="table-wrap" id="tableWrap">
+          <h3 style="margin-bottom:12px">Summary Table</h3>
+          <table id="studentsTable">
+            <thead>
+              <tr><th>Name</th><th>Email</th><th>Gender</th><th>Programme</th><th>Year</th><th>Interests</th><th>Actions</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
