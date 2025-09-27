@@ -3,121 +3,104 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Student Registration Portal</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>WAD621S — Lab 4: Registration → Profile Cards</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container" id="app">
-    <header>
-      <div class="logo">SR</div>
-      <div>
-        <h1>Student Registration Portal</h1>
-        <p class="lead">Register students, view profiles, edit or remove entries. Data persists in LocalStorage.</p>
+  <header class="site-header">
+    <h1>Campus Connect: Student Registration</h1>
+    <p class="lead">Enroll Today, Lead Tomorrow.</p>
+  </header>
+
+  <main class="container">
+    <section class="form-section" aria-labelledby="form-title">
+      <h2 id="form-title">Register Student</h2>
+
+      <form id="regForm" novalidate>
+        <div class="row">
+          <div class="field">
+            <label for="first">First name <span aria-hidden="true">*</span></label>
+            <input type="text" id="first" name="first" required autocomplete="given-name" />
+            <small class="error" id="err-first" aria-live="polite"></small>
+          </div>
+
+          <div class="field">
+            <label for="last">Last name <span aria-hidden="true">*</span></label>
+            <input type="text" id="last" name="last" required autocomplete="family-name" />
+            <small class="error" id="err-last" aria-live="polite"></small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email <span aria-hidden="true">*</span></label>
+          <input type="email" id="email" name="email" required autocomplete="email" />
+          <small class="error" id="err-email" aria-live="polite"></small>
+        </div>
+
+        <div class="field">
+          <label for="prog">Programme <span aria-hidden="true">*</span></label>
+          <input type="text" id="prog" name="prog" required placeholder="Enter your programme" />
+          <small class="error" id="err-prog" aria-live="polite"></small>
+        </div>
+
+        <fieldset class="field">
+          <legend>Year of Study <span aria-hidden="true">*</span></legend>
+          <div class="horizontal-options">
+            <label><input type="radio" name="year" value="1" required> 1</label>
+            <label><input type="radio" name="year" value="2"> 2</label>
+            <label><input type="radio" name="year" value="3"> 3</label>
+            <label><input type="radio" name="year" value="4"> 4</label>
+          </div>
+          <small class="error" id="err-year" aria-live="polite"></small>
+        </fieldset>
+
+        <div class="field">
+          <label for="interests">Interests (comma separated)</label>
+          <input type="text" id="interests" name="interests" placeholder="e.g. Cooking, Driving, Movies" />
+        </div>
+
+        <div class="field">
+          <label for="photo">Photo (Show us your smile)</label>
+          <input type="file" accept="image/*" id="photo" name="photo" />
+          <small class="muted">Student Photo</small>
+          <div id="preview" class="preview" aria-hidden="true"></div>
+          <small class="error" id="err-photo" aria-live="polite"></small>
+        </div>
+
+        <div aria-live="polite" class="sr" id="live">Add when you're ready!</div>
+
+        <div class="form-actions">
+          <button type="submit" id="submitBtn">Add Student</button>
+          <button type="reset" id="resetBtn" class="secondary">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="cards-section" aria-labelledby="cards-title">
+      <h2 id="cards-title">Profiles</h2>
+      <div id="controls" class="controls">
+        <input id="search" placeholder="Search by name or programme..." aria-label="Search profiles" />
       </div>
-    </header>
+      <div id="cards" class="cards" aria-live="polite"></div>
+    </section>
 
-    <div class="grid">
-      <!-- Form column -->
-      <section class="card">
-        <form id="studentForm" autocomplete="off">
-          <input type="hidden" id="studentId" />
-          <div class="form-row">
-            <div style="flex:1">
-              <label for="firstName">First name</label>
-              <input id="firstName" type="text" required />
-            </div>
-            <div style="flex:1">
-              <label for="lastName">Last name</label>
-              <input id="lastName" type="text" required />
-            </div>
-          </div>
+    <section class="table-section" aria-labelledby="summary-title">
+      <h2 id="summary-title">Summary Table</h2>
+      <div class="table-wrap">
+        <table id="summary" aria-describedby="summary-title">
+          <caption class="sr">Summary of registered students</caption>
+          <thead>
+            <tr><th>Name</th><th>Programme</th><th>Year</th><th>Interests</th><th>Actions</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
 
-          <div class="form-row">
-            <div style="flex:1">
-              <label for="email">Email</label>
-              <input id="email" type="email" required />
-            </div>
-            <div style="flex:1">
-              <label for="gender">Gender</label>
-              <select id="gender" required>
-                <option value="">-- Select Gender --</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-              </select>
-            </div>
-          </div>
-
-          <div style="margin-bottom:10px">
-            <label for="programme">Programme</label>
-            <select id="programme" required>
-              <option value="">-- Select programme --</option>
-              <option>Software Engineering</option>
-              <option>Computer Science</option>
-              <option>Information Technology</option>
-              <option>Network Administration</option>
-            </select>
-          </div>
-
-          <div style="margin-bottom:10px">
-            <label>Year of study</label>
-            <div class="form-row" style="gap:10px">
-              <label><input type="radio" name="year" value="1" required /> Year 1</label>
-              <label><input type="radio" name="year" value="2" /> Year 2</label>
-              <label><input type="radio" name="year" value="3" /> Year 3</label>
-              <label><input type="radio" name="year" value="4" /> Year 4</label>
-            </div>
-          </div>
-
-          <div style="margin-bottom:10px">
-            <label for="interests">Interests (comma separated)</label>
-            <input id="interests" type="text" placeholder="e.g. Web dev, AI, Cybersecurity" />
-          </div>
-
-          <div style="display:flex;gap:12px;align-items:center">
-            <div class="photo-preview" id="photoPreview"> <span class="muted">96×96</span> </div>
-            <div style="flex:1">
-              <label for="photo">Profile photo</label>
-              <input id="photo" type="file" accept="image/*" />
-              <div class="small">Optional. If not supplied, a default avatar will be used.</div>
-            </div>
-          </div>
-
-          <div class="actions">
-            <button type="submit" id="saveBtn">Add Student</button>
-            <button type="button" id="resetBtn" class="ghost">Reset</button>
-            <div style="margin-left:auto;color:#475569;font-size:13px;padding:8px">Records: <span id="count">0</span></div>
-          </div>
-        </form>
-      </section>
-
-      <!-- Display column -->
-      <section>
-        <div class="controls">
-          <div class="search">
-            <input id="search" placeholder="Search by name or programme" />
-            <button id="clearSearch" class="ghost" type="button">Clear</button>
-          </div>
-          <div class="muted">Tip: click Edit on a table row or card to populate the form.</div>
-        </div>
-
-        <div class="card">
-          <h3 style="margin-bottom:12px">Student Profiles</h3>
-          <div class="cards" id="cardsContainer"></div>
-        </div>
-
-        <div class="table-wrap" id="tableWrap">
-          <h3 style="margin-bottom:12px">Summary Table</h3>
-          <table id="studentsTable">
-            <thead>
-              <tr><th>Name</th><th>Email</th><th>Gender</th><th>Programme</th><th>Year</th><th>Interests</th></tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </section>
-    </div>
-  </div>
+  <footer class="site-footer">
+    <p>WAD621S — Lab 4 • Made with ❤ by <strong>Etuwete Ndaningina</strong></p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
