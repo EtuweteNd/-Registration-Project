@@ -17,7 +17,7 @@ function showError(id, msg){
 }
 
 function validateEmail(v){
-  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]/.test(v);
   showError('email', ok ? '' : 'Please enter a valid email.');
   return ok;
 }
@@ -221,3 +221,4 @@ searchInput.addEventListener('input', ()=>{
 // load previously saved data from local storage
 load();
 syncAll();
+
